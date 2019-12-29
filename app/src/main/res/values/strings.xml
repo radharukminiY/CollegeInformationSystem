@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CollegeInformationSystem</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="aboutUsPara">The IEEE Broadcast Technology Society (BTS, https://bts.ieee.org/about-bts.html), the official sponsor organization of the symposium, is one of the founding organizations of IEEE, and has a history that stretches to the formation of the Institute of Radio Engineers in 1912. The BTS mission is to serve the needs of the members of the Broadcast Technology Society to enhance their professional knowledge and vitality by keeping them informed of the latest research results and their practical applications.</string>
+    <string name="aboutUsPara_one">Conferences are an important part of the society, as they enable the exchange of new information and the formation of social networks. The IEEE International Symposium on Broadband Multimedia Systems and Broadcasting (BMSB) is one of the major conferences in the society, held in June every year. This year the Symposium will be held in Jeju island, South Korea on June 5th through 7th, 2019.</string>
+    <string name="text_forget_pass">Forgot Password? </string>
+    <string name="explore_gust_user">Explore As Guest </string>
+    <string name="uploadphoto">Upload Photo</string>
+    <string name="action_settings">Settings</string>
+    <string name="next">next</string>
+    <string name="send">Send</string>
 </resources>

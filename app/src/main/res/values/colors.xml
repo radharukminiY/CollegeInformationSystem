@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#A8540D</color>
+    <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorHomebackground">#F8FAFB</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorBlue">#2B7DE9</color>
-    <color name="colorOriange">#FC9203</color>
-    <color name="color_status">#A8540D</color>
-    <color name="colorIsep">#8F490E</color>
-    <color name="colorListView">#837B7B</color>
-    <color name="colorListNameText">#4B6880</color>
-    <color name="colorWhiteDull">#E6CFCF</color>
-    <color name="colorTransparentFifty">#7FCF7676</color>
-    <color name="colorTransparentBtn">#EE5A27</color>
-
-
-
-
 </resources>

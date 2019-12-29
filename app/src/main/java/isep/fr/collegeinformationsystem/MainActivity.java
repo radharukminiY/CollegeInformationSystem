@@ -1,10 +1,8 @@
-package isep.fr.collegeinformationsystem.activity;
+package isep.fr.collegeinformationsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import isep.fr.collegeinformationsystem.R;
 
 public class MainActivity extends AppCompatActivity {
 

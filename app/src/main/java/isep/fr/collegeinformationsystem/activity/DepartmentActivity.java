@@ -1,5 +1,4 @@
 package isep.fr.collegeinformationsystem.activity;
 
-public class SplashScreenActivity {
-
+public class DepartmentActivity {
 }

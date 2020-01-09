@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_schedule"
             android:title="Events" />
         <item
+            android:id="@+id/nav_contactUs"
+            android:icon="@drawable/ic_aboutus"
+            android:title="Contact Us" />
+        <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_location"
             android:title="Locate Us" />

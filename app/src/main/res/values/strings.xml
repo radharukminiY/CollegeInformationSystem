@@ -4,5 +4,6 @@
     <string name="next">next</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="welcome_home">Welcome to ISEP</string>
+    <string name="welcome_home_interduct"> The international dimension is essential in the training of ISEP engineers and constitutes a real asset for their professional development . Thus, 130 agreements with university partners allow students to complete their academic semester on 5 continents. Many students from all over the world are studying in Paris at ISEP. Promotions are thus placed under the sign of diversity.</string>
 </resources>

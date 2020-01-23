@@ -42,10 +42,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/welcome_home"
                         android:textColor="@color/colorWhite"
+                        android:layout_marginBottom="5dp"
                         android:textSize="18sp"
                         android:textStyle="bold" />
-
-
 
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/imageSlider"
@@ -72,6 +71,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="10dp"
@@ -198,7 +198,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/btn_three"
+                        android:id="@+id/btn_dept"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
@@ -210,7 +210,7 @@
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/btn_four"
+                        android:id="@+id/btn_cours"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
@@ -223,7 +223,7 @@
 
 
                     <Button
-                        android:id="@+id/btn_five"
+                        android:id="@+id/btn_vocher"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
@@ -247,7 +247,7 @@
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/btn_six"
+                        android:id="@+id/btn_contact"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"

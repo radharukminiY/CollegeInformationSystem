@@ -1,9 +1,47 @@
 <resources>
     <string name="app_name">CollegeInformationSystem</string>
-    <string name="uploadphoto">Upload Photo</string>
-    <string name="next">next</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="welcome_name">Isep "\n" College Info</string>
+    <string name="username_hint">Enter user name</string>
+    <string name="userpass_hint">Enter Password</string>
+    <string name="text_forget_pass">Forgot Password? </string>
+    <string name="explore_gust_user">Explore As Guest </string>
+
+    <!--app Strings-->
     <string name="welcome_home">Welcome to ISEP</string>
-    <string name="welcome_home_interduct"> The international dimension is essential in the training of ISEP engineers and constitutes a real asset for their professional development . Thus, 130 agreements with university partners allow students to complete their academic semester on 5 continents. Many students from all over the world are studying in Paris at ISEP. Promotions are thus placed under the sign of diversity.</string>
+    <string name="welcome_home_interduct"> ISEP is a French engineering graduate school in digital technology, known as a “Grande Écoled’Ingénieurs”. ISEP trains very high-level graduate engineers who receive a thorough training in Electronics, Telecommunications &amp; Networks, Software Engineering, Signal-Image Processing and Humanities, providing them with the required knowledge and skills to meet the needs of businesses. Since 2008, ISEP has been offering an international program taught fully in English which allows international students to obtain the Engineering Master Degree. Thanks to a strong partnership with the companies in related industries, this program includes a professional internship. Join ISEP to build a better future so that the digital technology is at the service of hummanity.</string>
+
+    <string name="aboutUsPara">The IEEE Broadcast Technology Society (BTS, https://bts.ieee.org/about-bts.html), the official sponsor organization of the symposium, is one of the founding organizations of IEEE, and has a history that stretches to the formation of the Institute of Radio Engineers in 1912. The BTS mission is to serve the needs of the members of the Broadcast Technology Society to enhance their professional knowledge and vitality by keeping them informed of the latest research results and their practical applications.</string>
+    <string name="aboutUsPara_one">Conferences are an important part of the society, as they enable the exchange of new information and the formation of social networks. The IEEE International Symposium on Broadband Multimedia Systems and Broadcasting (BMSB) is one of the major conferences in the society, held in June every year. This year the Symposium will be held in Jeju island, South Korea on June 5th through 7th, 2019.</string>
+    <string name="uploadphoto">Upload Photo</string>
+    <string name="next">next</string>
+    <string name="send">Send</string>
+    <string name="create">Create Student</string>
+    <string name="update_admin">Update Admin</string>
+    <string name="create_staff">Create Staff</string>
+    <string name="update_staff">Update Staff</string>
+    <string name="create_dept">Create Department</string>
+    <string name="update_dept">Update Department</string>
+    <string name="nochat_yet">NoChatsYet</string>
+    <string name="create_event">Create Event</string>
+
+
+    <string-array name="gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="course">
+        <item>Select Course</item>
+        <item>CSE</item>
+        <item>EMBADED</item>
+        <item>IOT</item>
+    </string-array>
 </resources>

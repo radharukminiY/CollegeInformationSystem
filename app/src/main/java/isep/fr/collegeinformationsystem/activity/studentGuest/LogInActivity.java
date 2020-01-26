@@ -2,6 +2,7 @@ package isep.fr.collegeinformationsystem.activity.studentGuest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONObject;
 
 import isep.fr.collegeinformationsystem.R;
 import isep.fr.collegeinformationsystem.WebServiceRequest.LogInCheck;
@@ -19,8 +20,6 @@ import isep.fr.collegeinformationsystem.WebServiceUtil.ConnectivityReceiver;
 import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
 import isep.fr.collegeinformationsystem.activity.admin.AdminHomeActivity;
 import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
-
-import org.json.JSONObject;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 

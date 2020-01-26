@@ -10,6 +10,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,16 +28,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 import isep.fr.collegeinformationsystem.Constants;
 import isep.fr.collegeinformationsystem.R;
@@ -42,11 +46,6 @@ import isep.fr.collegeinformationsystem.activity.admin.AdminEventsActivity;
 import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
 import isep.fr.collegeinformationsystem.interfaces.CircleTransform;
 import isep.fr.collegeinformationsystem.interfaces.FileUtil;
-
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
 
 public class StudentProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "StudentProfile";

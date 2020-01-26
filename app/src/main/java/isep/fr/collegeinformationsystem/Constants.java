@@ -9,7 +9,7 @@ public class Constants {
 
 
     //** Main Url ** //
-    private static final String GET_DATA_URL = "http://192.168.0.37:8080/isep/";
+    private static final String GET_DATA_URL = "http://192.168.43.5:8080/isep/";
     //root url
     private static final String ROOT_URL = GET_DATA_URL + "services/";
 

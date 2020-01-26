@@ -1,36 +1,38 @@
 package isep.fr.collegeinformationsystem.activity.admin;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import isep.fr.collegeinformationsystem.Constants;
-import isep.fr.collegeinformationsystem.R;
-import isep.fr.collegeinformationsystem.activity.studentGuest.LogInActivity;
-import isep.fr.collegeinformationsystem.WebServiceRequest.GetAllDeptInfoService;
-import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
-import isep.fr.collegeinformationsystem.adapter.AdminDepartViewAdapter;
-import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
-import isep.fr.collegeinformationsystem.model.AdminCourseModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import isep.fr.collegeinformationsystem.Constants;
+import isep.fr.collegeinformationsystem.R;
+import isep.fr.collegeinformationsystem.WebServiceRequest.GetAllDeptInfoService;
+import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
+import isep.fr.collegeinformationsystem.activity.studentGuest.LogInActivity;
+import isep.fr.collegeinformationsystem.adapter.AdminDepartViewAdapter;
+import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
+import isep.fr.collegeinformationsystem.model.AdminCourseModel;
 
 public class AdminDepartmentViewActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -40,6 +42,8 @@ public class AdminDepartmentViewActivity extends AppCompatActivity implements Na
     public AdminDepartViewAdapter deptListAdapter;
     public ArrayList<AdminCourseModel> courses = new ArrayList<>();
     RecyclerView recyclerView;
+
+    public static ProgressDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class AdminDepartmentViewActivity extends AppCompatActivity implements Na
 
             }
         });*/
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +176,21 @@ public class AdminDepartmentViewActivity extends AppCompatActivity implements Na
     }
 
 
+    public static void showProgress(Context context){
+
+        progressDoalog = new ProgressDialog(context);
+        progressDoalog.setMessage("Please wait....");
+        progressDoalog.show();
+
+
+    }
+
+    public static void hideProgress(){
+        progressDoalog.dismiss();
+
+    }
+
+
 
 
     public class getAllDeptResponse implements ServerResponseListener {
@@ -208,7 +228,7 @@ public class AdminDepartmentViewActivity extends AppCompatActivity implements Na
 
                             }
 
-                            deptListAdapter = new AdminDepartViewAdapter(getApplicationContext(), courses);
+                            deptListAdapter = new AdminDepartViewAdapter(AdminDepartmentViewActivity.this, courses);
                             recyclerView.setAdapter(deptListAdapter);
 
                         } else {

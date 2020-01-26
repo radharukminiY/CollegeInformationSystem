@@ -2,6 +2,8 @@ package isep.fr.collegeinformationsystem.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +13,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import isep.fr.collegeinformationsystem.Constants;
 import isep.fr.collegeinformationsystem.R;
 import isep.fr.collegeinformationsystem.WebServiceRequest.DeleteDepartmentService;
+import isep.fr.collegeinformationsystem.WebServiceRequest.DeleteStaffService;
+import isep.fr.collegeinformationsystem.WebServiceRequest.DeleteStudentService;
+import isep.fr.collegeinformationsystem.WebServiceRequest.GetAllStaffInfoService;
+import isep.fr.collegeinformationsystem.WebServiceRequest.GetAllStudentInfoService;
+import isep.fr.collegeinformationsystem.WebServiceUtil.ConnectivityReceiver;
 import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
+import isep.fr.collegeinformationsystem.activity.admin.AdminDepartmentViewActivity;
 import isep.fr.collegeinformationsystem.activity.admin.AdminDeptUpdateActivity;
 import isep.fr.collegeinformationsystem.activity.admin.AdminProfessorActivity;
 import isep.fr.collegeinformationsystem.model.AdminCourseModel;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartViewAdapter.MyViewHolder> {
 
@@ -32,12 +38,15 @@ public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartView
 
     private ArrayList<AdminCourseModel> courseListData;
     private Context context;
-
+    ArrayList<String> staffeId;
+    ArrayList<String> studentId;
 
     public AdminDepartViewAdapter(Context context, ArrayList<AdminCourseModel> courseListData) {
 
         this.context = context;
         this.courseListData = courseListData;
+        this.staffeId = new ArrayList<>();
+        this.studentId = new ArrayList<>();
 
     }
 
@@ -81,7 +90,6 @@ public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartView
                 context.startActivity(intent);
 
 
-
             }
         });
 
@@ -89,8 +97,19 @@ public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartView
             @Override
             public void onClick(View v) {
 
-                DeleteDepartmentService deleteDepartmentService = new DeleteDepartmentService(context, courseListData.get(position).getCourseId(), new deleteDeptResponse(courseListData.get(position)));
-                deleteDepartmentService.DeleteDepartmentService();
+                if (ConnectivityReceiver.isConnected()) {
+
+                    staffeId.clear();
+                    studentId.clear();
+                    AdminDepartmentViewActivity.showProgress(context);
+
+                    DeleteDepartmentService deleteDepartmentService = new DeleteDepartmentService(context, courseListData.get(position).getCourseId(), new deleteDeptResponse(courseListData.get(position)));
+                    deleteDepartmentService.DeleteDepartmentService();
+                } else {
+                    Toast.makeText(context, "please check your network ", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -185,6 +204,31 @@ public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartView
                     //progressDoalog.dismiss();
                     Log.d(TAG, "dept deleted successfully ");
 
+
+                    getAllStaffAndDelete(courseModels.getCourseShortName());
+                    getAllStudentData(courseModels.getCourseShortName());
+
+                    for (int i = 0; i < staffeId.size(); i++) {
+                        clearAllStaffData(staffeId.get(i));
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            System.out.println(e);
+                        }
+                    }
+
+                    for (int i = 0; i < studentId.size(); i++) {
+                        clearAllStudentData(studentId.get(i));
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            System.out.println(e);
+                        }
+
+                    }
+
+                    AdminDepartmentViewActivity.hideProgress();
+
                     courseListData.remove(courseModels);
                     notifyDataSetChanged();
                     Toast.makeText(context, "department deleted successfully", Toast.LENGTH_SHORT).show();
@@ -205,6 +249,217 @@ public class AdminDepartViewAdapter extends RecyclerView.Adapter<AdminDepartView
 
 
         }
+
+        private void getAllStaffAndDelete(String deptShortName) {
+            GetAllStaffInfoService getAllStaffInfoService = new GetAllStaffInfoService(context, "", new getAllStaffDataResponce(deptShortName));
+            getAllStaffInfoService.GetAllStaffInfoService();
+        }
+
+        private void getAllStudentData(String deptShortName) {
+            GetAllStudentInfoService getAllStuInfoService = new GetAllStudentInfoService(context, "", new getAllStudentResponce(deptShortName));
+            getAllStuInfoService.GetAllStudentInfoService();
+        }
+
+        private void clearAllStaffData(String staffId) {
+            DeleteStaffService deleteStaffService = new DeleteStaffService(context, staffId, new deleteStaffResponse());
+            deleteStaffService.DeleteStaffService();
+        }
+
+        private void clearAllStudentData(String studentId) {
+            DeleteStudentService getAllStuInfoService = new DeleteStudentService(context, studentId, new deleteStudentResponse());
+            getAllStuInfoService.DeleteStudentService();
+        }
+
+
+        private class getAllStaffDataResponce implements ServerResponseListener {
+
+            String deptName;
+
+            public getAllStaffDataResponce(String deptShortName) {
+
+                this.deptName = deptShortName;
+            }
+
+            @Override
+            public void onResponseData(Object resultObj) {
+                Log.d(TAG, "get all staff responce = " + resultObj.toString());
+
+                try {
+                    JSONObject object = new JSONObject(resultObj.toString());
+
+                    String status = object.getString("status");
+
+
+                    if (status.equals("0")) {
+
+                        JSONArray jsonArray = object.getJSONArray(Constants.DATA);
+
+                        if (jsonArray.length() != 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject staffObj = jsonArray.getJSONObject(i);
+
+                                String staffId = staffObj.getString(Constants.STAFF_ID);
+                                String staffName = staffObj.getString(Constants.STAFF_NAME);
+                                String staffMail = staffObj.getString(Constants.STAFF_MAIL_ID);
+                                String staffQualify = staffObj.getString(Constants.STAFF_QUALIFICATION);
+                                String staffDept = staffObj.getString(Constants.STAFF_DEPT);
+                                String staffDealSub = staffObj.getString(Constants.STAFF_DEAL_SUB);
+                                String staffMob = staffObj.getString(Constants.STAFF_MOBILE_NUM);
+                                String staffGender = staffObj.getString(Constants.STAFF_GENDER);
+                                String staffImage = staffObj.getString(Constants.STAFF_PROFILE);
+
+                                if (staffDept.contains("\r\n\r\n")) {
+                                    staffDept = staffDept.replace("\r\n\r\n", "");
+                                }
+
+                                if (deptName != null && deptName.equals(staffDept)) {
+
+                                    staffeId.add(staffId);
+
+                                }
+
+
+                            }
+
+
+                        } else {
+                            // Nodata is getting please set no data in the list
+                        }
+
+                    } else {
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.d(TAG, "getting string status  error - " + e.toString());
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+
+        private class getAllStudentResponce implements ServerResponseListener {
+
+            String deptName;
+
+            public getAllStudentResponce(String deptShortName) {
+                this.deptName = deptShortName;
+            }
+
+            @Override
+            public void onResponseData(Object resultObj) {
+                Log.d(TAG, "student responce = " + resultObj.toString());
+
+                try {
+                    JSONObject object = new JSONObject(resultObj.toString());
+
+                    String status = object.getString("status");
+
+
+                    if (status.equals("0")) {
+
+                        JSONArray jsonArray = object.getJSONArray(Constants.DATA);
+
+                        if (jsonArray.length() != 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                //String deptId = staffObj.getString(Constants.DEP);
+                                JSONObject jobj = jsonArray.getJSONObject(i);
+                                String stuId = jobj.getString(Constants.USER_ID);
+                                String studentDept = jobj.getString(Constants.USER_DEPT);
+
+                                if (studentDept != null && !studentDept.isEmpty() && studentDept.equals(studentDept)) {
+                                    studentId.add(stuId);
+                                }
+
+                            }
+
+                        } else {
+                            // Nodata is getting please set no data in the list
+                        }
+
+                    } else {
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.d(TAG, "getting string status  error - " + e.toString());
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+        private class deleteStaffResponse implements ServerResponseListener {
+
+
+            @Override
+            public void onResponseData(Object resultObj) {
+                Log.d(TAG, "staff response = " + resultObj.toString());
+
+                try {
+                    JSONObject object = new JSONObject(resultObj.toString());
+
+                    String status = object.getString("status");
+
+
+                    if (status.equals("0")) {
+                        //progressDoalog.dismiss();
+
+
+                    } else {
+                        //progressDoalog.dismiss();
+                        Log.d(TAG, "staff deleted failed ");
+                        Toast.makeText(context, "staff deleted have problem", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (Exception e) {
+                    //progressDoalog.dismiss();
+                    Log.d(TAG, "getting string status  error - " + e.toString());
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+
+        private class deleteStudentResponse implements ServerResponseListener {
+
+            @Override
+            public void onResponseData(Object resultObj) {
+                Log.d(TAG, "student responce = " + resultObj.toString());
+
+                try {
+                    JSONObject object = new JSONObject(resultObj.toString());
+
+                    String status = object.getString("status");
+
+                    if (status.equals("0")) {
+
+                    } else {
+                        Toast.makeText(context, "student deleted failed", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.d(TAG, "getting string status  error - " + e.toString());
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+
     }
 
 }

@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,17 +24,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.navigation.NavigationView;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -211,7 +208,7 @@ public class AdminStaffUpdateActivity extends AppCompatActivity implements Navig
                     uGender = staffGender.getSelectedItem().toString();
 
 
-                    uDept = userSelectDept;
+                    uDept = userSelectDept.trim();
                     uProfilePath = userProfilrImage;
 
                     Log.d(TAG,"user selected depart "+uDept);

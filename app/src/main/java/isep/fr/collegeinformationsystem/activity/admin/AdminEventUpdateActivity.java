@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-import com.google.android.material.navigation.NavigationView;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +28,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+
 import isep.fr.collegeinformationsystem.Constants;
 import isep.fr.collegeinformationsystem.R;
 import isep.fr.collegeinformationsystem.WebServiceRequest.UpdateEventInfoService;
@@ -35,12 +42,6 @@ import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
 import isep.fr.collegeinformationsystem.activity.studentGuest.LogInActivity;
 import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
 import isep.fr.collegeinformationsystem.interfaces.FileUtil;
-
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
 
 public class AdminEventUpdateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "InsertEventActivity";

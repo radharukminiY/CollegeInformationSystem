@@ -8,14 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +15,18 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,8 +62,7 @@ public class StudentProfessorActivity extends AppCompatActivity implements Navig
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -68,7 +71,7 @@ public class StudentProfessorActivity extends AppCompatActivity implements Navig
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(!AppSharedPreferences.getInstance().getUserType().equals("student")){
+        if (!AppSharedPreferences.getInstance().getUserType().equals("student")) {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_events).setVisible(false);
         }
@@ -120,7 +123,7 @@ public class StudentProfessorActivity extends AppCompatActivity implements Navig
 
         if (department != null) {
 
-            GetAllStaffInfoService getAllStaffInfoService = new GetAllStaffInfoService(getApplicationContext(), "", new getAllStaffResponse());
+            GetAllStaffInfoService getAllStaffInfoService = new GetAllStaffInfoService(StudentProfessorActivity.this, "", new getAllStaffResponse());
             getAllStaffInfoService.GetAllStaffInfoService();
 
 
@@ -257,7 +260,7 @@ public class StudentProfessorActivity extends AppCompatActivity implements Navig
                             String stafDeptCheck = null;
                             if (staffDept.contains("\r\n\r\n")) {
                                 stafDeptCheck = staffDept.replace("\r\n\r\n", "");
-                            }else{
+                            } else {
                                 stafDeptCheck = staffDept;
                             }
 

@@ -1,8 +1,6 @@
 package isep.fr.collegeinformationsystem.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import isep.fr.collegeinformationsystem.R;
 import isep.fr.collegeinformationsystem.model.ProfessorModel;
+
+import java.util.ArrayList;
 
 public class StudentProfessorViewAdapter extends RecyclerView.Adapter<StudentProfessorViewAdapter.MyViewHolder> {
 

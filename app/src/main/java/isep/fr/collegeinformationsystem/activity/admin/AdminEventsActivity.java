@@ -3,26 +3,23 @@ package isep.fr.collegeinformationsystem.activity.admin;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import isep.fr.collegeinformationsystem.Constants;
 import isep.fr.collegeinformationsystem.R;
@@ -32,6 +29,11 @@ import isep.fr.collegeinformationsystem.activity.studentGuest.LogInActivity;
 import isep.fr.collegeinformationsystem.adapter.EventListAdapter;
 import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
 import isep.fr.collegeinformationsystem.model.EventsModel;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AdminEventsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AdminEventsActivity";
@@ -205,7 +207,7 @@ public class AdminEventsActivity extends AppCompatActivity implements Navigation
 
                         }
 
-                        eventListAdapter = new EventListAdapter(AdminEventsActivity.this, eventsModels);
+                        eventListAdapter = new EventListAdapter(getApplicationContext(), eventsModels);
                         recyclerView.setAdapter(eventListAdapter);
 
                     } else {

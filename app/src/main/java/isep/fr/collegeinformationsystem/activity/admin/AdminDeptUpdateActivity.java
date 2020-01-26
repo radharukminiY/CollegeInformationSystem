@@ -9,12 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.OpenableColumns;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-
 import isep.fr.collegeinformationsystem.Constants;
 import isep.fr.collegeinformationsystem.R;
 import isep.fr.collegeinformationsystem.WebServiceRequest.UpdateDeptInfoService;
@@ -36,6 +31,11 @@ import isep.fr.collegeinformationsystem.WebServiceUtil.ServerResponseListener;
 import isep.fr.collegeinformationsystem.activity.studentGuest.LogInActivity;
 import isep.fr.collegeinformationsystem.database.AppSharedPreferences;
 import isep.fr.collegeinformationsystem.interfaces.FileUtil;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AdminDeptUpdateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
